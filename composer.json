@@ -1,0 +1,83 @@
+{
+    "name": "hosttech/laravel-slack-block-kit-builder",
+    "description": "Laravel package to build Block Kit payloads in an object oriented way",
+    "version": "v1.0.0",
+    "keywords": [
+        "hosttech GmbH",
+        "laravel",
+        "slack-block-kit"
+    ],
+    "homepage": "https://hosttech-gmbh.github.io/laravel-slack-block-kit-builder-docs/",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "illuminate/contracts": "^10.0||^11.0",
+        "illuminate/support": "^10.0||^11.0",
+        "spatie/laravel-package-tools": "^1.16"
+    },
+    "require-dev": {
+        "larastan/larastan": "^2.9",
+        "laravel/pint": "^1.17",
+        "nunomaduro/collision": "^8.1.1||^7.10.0",
+        "orchestra/testbench": "^9.0.0||^8.22.0",
+        "pestphp/pest": "^2.34",
+        "pestphp/pest-plugin-arch": "^2.7",
+        "pestphp/pest-plugin-laravel": "^2.3",
+        "phpstan/extension-installer": "^1.3",
+        "phpstan/phpstan-deprecation-rules": "^1.1",
+        "phpstan/phpstan-phpunit": "^1.3",
+        "rector/rector": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hosttech\\SlackBlockKitBuilder\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Hosttech\\SlackBlockKitBuilder\\Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/"
+        }
+    },
+    "suggest": {
+        "spatie/laravel-slack-alerts": "To send the payload created by this package to Slack"
+    },
+    "scripts": {
+        "post-autoload-dump": "@composer run prepare",
+        "clear": "@php vendor/bin/testbench package:purge-slack-block-kit-builder --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": [
+            "@composer run prepare",
+            "@php vendor/bin/testbench workbench:build --ansi"
+        ],
+        "start": [
+            "Composer\\Config::disableProcessTimeout",
+            "@composer run build",
+            "@php vendor/bin/testbench serve"
+        ],
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint",
+        "test-format": "vendor/bin/pint --test"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Hosttech\\SlackBlockKitBuilder\\SlackBlockKitBuilderServiceProvider"
+            ],
+            "aliases": {
+                "SlackBlockKitBuilder": "Hosttech\\SlackBlockKitBuilder\\Facades\\SlackBlockKitBuilder"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
