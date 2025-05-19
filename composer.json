@@ -1,5 +1,5 @@
 {
-    "name": "hosttech/laravel-slack-block-kit-builder",
+    "name": "slund/laravel-slack-block-kit-builder",
     "description": "Laravel package to build Block Kit payloads in an object oriented way",
     "version": "v1.0.0",
     "keywords": [
